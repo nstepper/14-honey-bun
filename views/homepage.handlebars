@@ -1,0 +1,17 @@
+{{> main}}
+
+{{#if posts.length}}
+  <h2>Latest Blog Posts</h2>
+  <div class="post-list">
+    {{#each posts}}
+      <div class="post">
+        <h3>{{title}}</h3>
+        <p class="post-content">{{content}}</p>
+        <p class="post-author">Posted by {{author}} on {{formattedDate}}</p>
+        <a href="/post/{{id}}" class="btn">Read More</a>
+      </div>
+    {{/each}}
+  </div>
+{{else}}
+  <p>No posts found.</p>
+{{/if}}
