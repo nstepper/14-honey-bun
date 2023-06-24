@@ -1,6 +1,6 @@
 const express = require('express');
 const session = require('express-session');
-const handlebars = require('express-handlebars');
+const exphbs = require('express-handlebars');
 const path = require('path');
 const sequelize = require('./db/connection');
 require('dotenv').config();
@@ -11,9 +11,11 @@ const homeController = require('./controllers/homeController');
 const postController = require('./controllers/postController');
 const userController = require('./controllers/userController');
 
+
 // Create the Express app
 const app = express();
 const PORT = process.env.PORT || 3000;
+
 
 // Set up session middleware
 app.use(
@@ -27,7 +29,7 @@ app.use(
 // Set up handlebars as the view engine
 app.engine(
   'handlebars',
-  handlebars({
+  exphbs({
     defaultLayout: 'main',
     layoutsDir: path.join(__dirname, 'views/layouts'),
     partialsDir: path.join(__dirname, 'views/partials')
@@ -42,16 +44,50 @@ app.use(express.urlencoded({ extended: true }));
 // Serve static files from the public directory
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Define routes
-app.get('/', homeController.homepage);
-app.get('/dashboard', homeController.dashboard);
-app.get('/login', homeController.loginPage);
-app.get('/signup', homeController.signupPage);
-app.post('/create-post', postController.createPost);
-app.post('/delete-post/:id', postController.deletePost);
-app.post('/login', userController.login);
-app.post('/signup', userController.signup);
-app.get('/logout', userController.logout);
+// Define routes with callbacks
+app.get('/', (req, res) => {
+  homeController.getHomepage(req, res);
+});
+
+app.get('/dashboard', (req, res) => {
+  homeController.getDashboard(req, res);
+  res.render('dashboard');
+});
+
+app.get('/login', (req, res) => {
+  homeController.getLoginPage(req, res);
+  res.render('login');
+});
+
+app.get('/signup', (req, res) => {
+  homeController.getSignupPage(req, res);
+  res.render('signup');
+});
+
+app.post('/create-post', (req, res) => {
+  postController.createPost(req, res);
+  res.render('create-post');
+});
+
+app.post('/delete-post/:id', (req, res) => {
+  postController.deletePost(req, res);
+  res.render('delete-post');
+});
+
+app.post('/login', (req, res) => {
+  userController.loginUser(req, res);
+  res.render('login');
+});
+
+app.post('/signup', (req, res) => {
+  userController.createUser(req, res);
+  res.render('signup');
+});
+
+app.get('/logout', (req, res) => {
+  userController.logoutUser(req, res);
+  res.render('logout');
+});
 
 // Sync the database and start the server
 sequelize.sync({ force: false }).then(() => {

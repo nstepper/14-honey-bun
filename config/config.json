@@ -1,21 +1,21 @@
 {
   "development": {
     "username": "nstep",
-    "password": "Sefchd15973Z",
+    "password": "rain",
     "database": "honeybun",
     "host": "localhost",
     "dialect": "mysql"
   },
   "test": {
     "username": "nstep",
-    "password": "Sefchd15973Z",
+    "password": "rain",
     "database": "honeybun",
     "host": "localhost",
     "dialect": "mysql"
   },
   "production": {
     "username": "nstep",
-    "password": "Sefchd15973Z",
+    "password": "rain",
     "database": "honeybun",
     "host": "localhost",
     "dialect": "mysql"

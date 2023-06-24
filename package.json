@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node server.js"
   },
-  "author": "Your Name",
+  "author": "Nathan Stepper",
   "license": "MIT",
   "dependencies": {
     "bcrypt": "^5.1.0",
