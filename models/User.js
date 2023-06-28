@@ -46,4 +46,11 @@ User.init(
   }
 );
 
+
 module.exports = User;
+
+// Import the Post model after the User model definition
+const Post = require('./Post');
+// Define the association
+User.hasMany(Post, { foreignKey: 'user_id' });
+Post.belongsTo(User, { foreignKey: 'user_id' });

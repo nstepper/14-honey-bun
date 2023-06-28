@@ -2,10 +2,6 @@ const fs = require('fs');
 const path = require('path');
 const { Sequelize } = require('sequelize');
 
-const sequelize = new Sequelize('honeybun', 'nstep', 'rain', {
-  host: 'localhost',
-  dialect: 'mysql',
-});
 
 const db = {};
 

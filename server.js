@@ -2,7 +2,7 @@ const express = require('express');
 const session = require('express-session');
 const exphbs = require('express-handlebars');
 const path = require('path');
-const sequelize = require('./db/connection');
+const sequelize = require('./config/connection');
 require('dotenv').config();
 
 
@@ -43,6 +43,13 @@ app.use(express.urlencoded({ extended: true }));
 
 // Serve static files from the public directory
 app.use(express.static(path.join(__dirname, 'public')));
+
+// Sync the database and start the server
+sequelize.sync({ force: false }).then(() => {
+  app.listen(PORT, () => {
+    console.log(`Server listening on port ${PORT}`);
+  });
+});
 
 // Define routes with callbacks
 app.get('/', (req, res) => {
@@ -89,9 +96,4 @@ app.get('/logout', (req, res) => {
   res.render('logout');
 });
 
-// Sync the database and start the server
-sequelize.sync({ force: false }).then(() => {
-  app.listen(PORT, () => {
-    console.log(`Server listening on port ${PORT}`);
-  });
-});
+

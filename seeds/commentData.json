@@ -1,0 +1,23 @@
+[
+    {
+      "content": "Great post!",
+      "user_id": 1,
+      "post_id": 1
+    },
+    {
+      "content": "Nice work!",
+      "user_id": 2,
+      "post_id": 1
+    },
+    {
+      "content": "Interesting read.",
+      "user_id": 3,
+      "post_id": 2
+    },
+    {
+      "content": "Thanks for sharing!",
+      "user_id": 2,
+      "post_id": 2
+    }
+  ]
+  
