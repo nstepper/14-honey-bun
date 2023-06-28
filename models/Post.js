@@ -3,6 +3,7 @@ const sequelize = new Sequelize('honeybun', 'nstep', 'rain', {
   host: 'localhost',
   dialect: 'mysql',
 });
+const User = require('./User');
 
 const Post = sequelize.define('Post', {
   title: {
@@ -24,5 +25,9 @@ const Post = sequelize.define('Post', {
     defaultValue: Sequelize.NOW,
   },
 });
+
+// Define the association
+Post.belongsTo(User, { foreignKey: 'userId' });
+User.hasMany(Post, { foreignKey: 'userId' });
 
 module.exports = Post;
