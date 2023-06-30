@@ -11,10 +11,9 @@ const homeController = require('./controllers/homeController');
 const postController = require('./controllers/postController');
 const userController = require('./controllers/userController');
 
-
 // Create the Express app
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3003;
 
 
 // Set up session middleware
@@ -37,19 +36,28 @@ app.engine(
 );
 app.set('view engine', 'handlebars');
 
-// Parse incoming JSON data
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-
 // Serve static files from the public directory
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Sync the database and start the server
-sequelize.sync({ force: false }).then(() => {
-  app.listen(PORT, () => {
-    console.log(`Server listening on port ${PORT}`);
-  });
+//Set the mimetype for CSS
+app.get('/public/style.css', (req, res) => {
+  res.set('Content-Type', 'text/css');
+  res.sendFile(path.join(__dirname, 'public', 'style.css'));
 });
+//Set the mimetype for JS
+app.get('/public/index.js', (req, res) => {
+  res.set('Content-Type', 'text/javascript');
+  res.sendFile(path.join(__dirname, 'public', 'index.js'));
+});
+
+//Set the mimetype for JS
+app.get('/dist/bundle.js', (req, res) => {
+  res.set('Content-Type', 'text/javascript');
+  res.sendFile(path.join(__dirname, 'dist', 'bundle.js'));
+});
+// Parse incoming JSON data
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 // Define routes with callbacks
 app.get('/', (req, res) => {
@@ -96,4 +104,9 @@ app.get('/logout', (req, res) => {
   res.render('logout');
 });
 
-
+// Sync the database and start the server
+sequelize.sync({ force: false }).then(() => {
+  app.listen(PORT, () => {
+    console.log(`Server listening on port ${PORT}`);
+  });
+});

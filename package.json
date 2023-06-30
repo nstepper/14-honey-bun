@@ -4,7 +4,8 @@
   "description": "A tech blog application",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "build": "webpack --mode production"
   },
   "author": "Nathan Stepper",
   "license": "MIT",
@@ -16,6 +17,11 @@
     "express-handlebars": "^5.3.5",
     "express-session": "^1.17.3",
     "mysql2": "^2.3.3",
+    "path": "^0.12.7",
     "sequelize": "^6.32.1"
+  },
+  "devDependencies": {
+    "webpack": "^5.88.1",
+    "webpack-cli": "^5.1.4"
   }
 }

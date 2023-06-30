@@ -1,6 +1,6 @@
 const express = require('express');
 const Post = require('../models/post');
-const User = require('../models/user');
+const User = require('../models/User');
 
 // Home route
 const getHomepage = async (req, res) => {
