@@ -58,7 +58,6 @@ app.get('/', (req, res) => {
 
 app.get('/dashboard', (req, res) => {
   homeController.getDashboard(req, res);
-  res.render('dashboard');
 });
 
 app.get('/login', (req, res) => {
