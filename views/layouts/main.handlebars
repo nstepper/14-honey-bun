@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tech Blog</title>
-  <link rel="stylesheet" href="../../public/style.css">
+  <link rel="stylesheet" href="/style.css">
 </head>
 
 <body>
@@ -15,12 +15,12 @@
       <ul>
         {{#if user}}
         <li><a href="/">Home</a></li>
-        <li><a href=".././dashboard">Dashboard</a></li>
-        <li><a href=".././logout">Logout</a></li>
+        <li><a href="/dashboard">Dashboard</a></li>
+        <li><a href="/logout">Logout</a></li>
         {{else}}
         <li><a href="/">Home</a></li>
-        <li><a href=".././login">Login</a></li>
-        <li><a href=".././signup">Sign Up</a></li>
+        <li><a href="/login">Login</a></li>
+        <li><a href="/signup">Sign Up</a></li>
         {{/if}}
       </ul>
     </nav>
@@ -34,8 +34,7 @@
     &copy; 2023 Tech Blog. All rights reserved.
   </footer>
 
-  <script src="/dist/bundle.js"></script>
-
+  <script src="/index.js"></script>
 </body>
 
 </html>
