@@ -28,7 +28,7 @@ Before running the project, make sure you have the following prerequisites insta
 
 To get started with the project, follow these steps:
 
-1. Clone the repository: `git clone <repository-url>`
+1. Clone the repository: `git clone https://github.com/nstepper/14-honey-bun`
 2. Navigate to the project directory: `cd honey-bun`
 3. Install the dependencies: `npm install`
 4. Configure the database connection: Open `config/config.json` and update the database credentials accordingly.

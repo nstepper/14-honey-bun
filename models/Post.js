@@ -1,28 +1,55 @@
-const { Sequelize, DataTypes } = require('sequelize');
-const sequelize = new Sequelize('honeybun', 'nstep', 'rain', {
-  host: 'localhost',
-  dialect: 'mysql',
-});
+const { Model, DataTypes } = require('sequelize');
+const sequelize = require('../config/connection');
 
-const Post = sequelize.define('Post', {
-  title: {
-    type: DataTypes.STRING,
-    allowNull: false,
+class Post extends Model {}
+
+Post.init(
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      primaryKey: true,
+      autoIncrement: true,
+    },
+    title: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    content: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+    },
+    createdAt: {
+      type: DataTypes.DATE,
+      allowNull: false,
+      defaultValue: DataTypes.NOW,
+    },
+    updatedAt: {
+      type: DataTypes.DATE,
+      allowNull: false,
+      defaultValue: DataTypes.NOW,
+    },
+    user_id: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: 'users',
+        key: 'id',
+      },
+    },
   },
-  content: {
-    type: DataTypes.TEXT,
-    allowNull: false,
-  },
-  createdAt: {
-    type: DataTypes.DATE,
-    allowNull: false,
-    defaultValue: Sequelize.NOW,
-  },
-  updatedAt: {
-    type: DataTypes.DATE,
-    allowNull: false,
-    defaultValue: Sequelize.NOW,
-  },
-});
+  {
+    sequelize,
+    underscored: true,
+    modelName: 'Post',
+    tableName: 'posts',
+  }
+);
+
 
 module.exports = Post;
+
+// Import the User model after the Post model definition
+const User = require('./User');
+// Define the association
+Post.belongsTo(User, { foreignKey: 'user_id' });
+User.hasMany(Post, { foreignKey: 'user_id' });
